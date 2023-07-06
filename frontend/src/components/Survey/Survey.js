@@ -2,12 +2,18 @@
 import { useForm } from "react-hook-form";
 import {useState} from 'react';
 import './survey.css';
+import {useNavigate} from 'react-router-dom';
 
 const Survey = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [surveyData, setSurveyData] = useState();
-    const onSubmit = data => setSurveyData(data);
+    const navigate = useNavigate();
+
+    const onSubmit = data => {
+        setSurveyData(data);
+        navigate('/profile');
+    }   
     
     return (
       /* "handleSubmit" will validate your inputs before invoking "onSubmit" */

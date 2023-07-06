@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './login'
 import Register from './register'
+import PersonDetails from './personDetails';
 import {
   BrowserRouter,
   createBrowserRouter,
@@ -24,6 +25,7 @@ root.render(
         <Route path="/register" element={<Register/>}/>
         <Route path="/survey" element={<Survey />}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/profile" element={<PersonDetails/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

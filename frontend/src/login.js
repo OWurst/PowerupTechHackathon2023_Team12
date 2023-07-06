@@ -51,7 +51,7 @@ const Login = () => {
     // Victory Royale! Your login is successful, and you're ready to dominate the battlefield!
     setErrorMessage('');
     console.log('Login successful!');
-    navigate("/survey");
+    navigate("/profile");
   };
 
   return (

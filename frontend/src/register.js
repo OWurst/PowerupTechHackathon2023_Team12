@@ -92,7 +92,7 @@ const Register = () => {
             setEmailError('')
         }
         console.log('Successful Registration');
-        navigate("/survey");
+        navigate("/profile");
     };
 
     return (

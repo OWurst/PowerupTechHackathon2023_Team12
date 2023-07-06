@@ -1,5 +1,6 @@
 import React from 'react';
 import './personDetails.css';
+import {useNavigate} from 'react-router-dom';
 
 function PersonDetails() {
   const person = {
@@ -15,10 +16,13 @@ function PersonDetails() {
     { id: 3, title: 'Item 3', description: 'Description 3' },
   ];
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <h2>Person Details</h2>
       <p>Name: {person.name}</p>
+      <button onClick={()=>navigate("/survey")}>Add employer</button>
       <table>
         <thead>
           <tr>
