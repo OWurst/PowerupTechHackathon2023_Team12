@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
@@ -17,6 +18,7 @@ const Register = () => {
     const [passwordError,setPasswordError] = useState('');
     const [emailError,setEmailError] = useState('');
 
+    const navigate = useNavigate();
 
     const handleFirstName = (event) => {
         setFirstName(event.target.value);
@@ -73,7 +75,6 @@ const Register = () => {
          } else {
             setSuccessMessage('Successfully Registered!');
             setErrorMessage('');
-            return;
         }
 
         if (newPassword.trim() !== confirmPassword.trim()) {
@@ -89,7 +90,8 @@ const Register = () => {
         } else {
             setEmailError('')
         }
-        console.log('Successful Registration')
+        console.log('Successful Registration');
+        navigate("/survey");
     };
 
     return (
@@ -201,6 +203,9 @@ const Register = () => {
             </div>
             <button type="submit">Register!</button>
         </form>       
+        <h4>Already have an account?&nbsp;
+        <Link to="/login">Login</Link>
+        </h4>
     </div>
     )
 }

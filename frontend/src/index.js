@@ -12,15 +12,18 @@ import {
   RouterProvider,
   Routes,
 } from "react-router-dom";
+import Survey from './components/Survey/Survey';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App/>}/>
-        <Route path="/login" element={<Login/>}/>
+        {/* <Route path="/" element={<App/>}/> */}
+        <Route path="/" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/survey" element={<Survey />}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

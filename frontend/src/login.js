@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Login = () => {
   // The Battle Bus has arrived, and it brought two chests to store your credentials! 🚌📦
@@ -6,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState(''); // And this is your password chest. 🔒
   const [errorMessage, setErrorMessage] = useState(''); // This is your error message flag. ⚠️
   const [loginMessage, setLoginMessage] = useState('');
-
+  const navigate = useNavigate();
   // When you collect a new username, store it in your username chest!
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -35,20 +36,21 @@ const Login = () => {
     // Oops! It seems your password didn't pass the security check. Don't worry, you can try again!
 
 
-    if (password !== 'bong' || username != 'bing') {
-      // Alert the player with a red warning message that their username or password is incorrect.
-      setErrorMessage('Incorrect/blank username or password');
-      setLoginMessage('');
-      return;
-    } else if (password == 'bong' && username == 'bing') {
-      setLoginMessage('Success, loggin you in');
-      setErrorMessage('');
-      return;
-    }
+    // if (password !== 'bong' || username !== 'bing') {
+    //   // Alert the player with a red warning message that their username or password is incorrect.
+    //   setErrorMessage('Incorrect/blank username or password');
+    //   setLoginMessage('');
+    //   return;
+    // } else if (password === 'bong' && username === 'bing') {
+    //   setLoginMessage('Success, loggin you in');
+    //   setErrorMessage('');
+    //   return;
+    // }
 
     // Victory Royale! Your login is successful, and you're ready to dominate the battlefield!
     setErrorMessage('');
     console.log('Login successful!');
+    navigate("/survey");
   };
 
   return (
@@ -77,6 +79,10 @@ const Login = () => {
         </div>
         <button type="submit">Log In</button> {/* Clicking this button triggers the submission of credentials. */}
       </form>
+
+        <h4>Don't have an account?&nbsp;
+        <Link to="/register">Register</Link>
+        </h4>
     </div>
   );
 };
