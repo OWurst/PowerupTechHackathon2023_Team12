@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Survey from './components/Survey';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter,
@@ -17,6 +18,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App/>}/>
+        <Route path="/survey" element={<Survey/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
