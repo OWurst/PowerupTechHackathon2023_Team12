@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import './register.css'
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
