@@ -2,8 +2,10 @@ import json
 from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask import Response
+from flask_cors import CORS, cross_origin
  
 app = Flask(__name__)
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_BINDS'] = {'form': 'sqlite:///form.db'}
@@ -59,9 +61,9 @@ def register():
 
     return Response(status=400, mimetype='application/json')
 
-@app.route('/login', methods = ['GET'])
+@app.route('/login', methods = ['POST'])
 def login():
-    if request.method == 'GET':
+    if request.method == 'POST':
         input = request.json
         uName = input["username"]
         pWord = input["password"]
@@ -92,25 +94,24 @@ def submitForm():
 
 @app.route('/getforms')
 def getForms():
-    input = request.json
-    id = input["user_id"]
-
+    args = request.args
+    id = args.get("user_id")
     forms = []
-    allForms = Forms.query.order_by(Forms.userId)
+    allForms = Forms.query.filter_by(userId=id)
     
-    for form in allForms:
-        if form.userId == id:
-            forms.append(form)
+    # for form in allForms:
+    #     if form.userId == id:
+    #         forms.append(form)
     
     formlist = []
-    for form in forms:
+    for form in allForms:
         elem = {
             "employerName" : form.employerName,
             "howFound" : form.howFound,
             "gotOffer" : form.gotOffered,
             "gotInterview" : form.gotInterview
         }
-        formlist.append(json.dumps(elem))
+        formlist.append(elem)
     
     ret = {
         "formList" : formlist
@@ -120,8 +121,8 @@ def getForms():
 
 @app.route('/user', methods = ['GET'])
 def getUser():
-    input = request.json
-    id = input["user_id"]
+    args = request.args
+    id = args.get("user_id")
 
     user = Users.query.get(id)
 
@@ -163,7 +164,7 @@ def baseEndpoint():
 
 def start():
     print("creating database")
-    db.drop_all()
+    # db.drop_all()
     db.create_all()
 
 
