@@ -46,11 +46,13 @@ function PersonDetails() {
   return (
     <div>
       <img style={{maxWidth: "10%", maxHeight: "10%", textAlign: "center"}} src={logo}/>
-      <h2>Person Details</h2>
-      <p>{userInfo && userInfo.username + " " + userInfo.lastname}</p>
-      <p>{userInfo && userInfo.college}</p>
-      <p>{userInfo && "Years with Yes Buffalo: "+userInfo.yearsWithProgram}</p>
-      <button onClick={()=>navigate("/survey")}>Add employer</button>
+      <h2>{userInfo && userInfo.username + " " + userInfo.lastname + "'s Profile Page"}</h2>
+      <div class = "personStuff">
+        {/* <p>{userInfo && userInfo.username + " " + userInfo.lastname}</p> */}
+        <p>{userInfo && "College/University: " + userInfo.college}</p>
+        <p>{userInfo && "Years with Say Yes Buffalo: "+userInfo.yearsWithProgram}</p>
+        <button onClick={()=>navigate("/survey")}>Add employer</button>
+      </div>
       <table>
         <thead>
           <tr>

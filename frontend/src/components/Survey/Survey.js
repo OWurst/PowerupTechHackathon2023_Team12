@@ -40,15 +40,15 @@ const Survey = () => {
         <br/>
         <label>Did you have an interview?
             <select {...register("getInterview", {required: true})}>
-                <option value="yes">No</option>
-                <option value="no">Yes</option>
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
             </select>
         </label>
         <br/>
         <label>Did you recieve an offer?
             <select {...register("getOffer", {required: true})}>
-                <option value="yes">No</option>
-                <option value="no">Yes</option>
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
             </select>
         </label>
 
