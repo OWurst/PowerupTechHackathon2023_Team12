@@ -34,7 +34,16 @@ export const API = {
             "got_offer" : gotOffer === "yes" ? true :  false,
             "social_media" : socialMedia
         });
+        return response.data;
+    },
 
+    getForms: async (user_id) =>{
+        const response = await api.get("/getforms?user_id="+user_id);
+        return response.data;
+    },
 
+    getUser: async (user_id) => {
+        const response = await api.get("/user?user_id="+user_id);
+        return response.data;
     }
 }

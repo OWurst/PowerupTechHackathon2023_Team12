@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './personDetails.css';
 import {useNavigate} from 'react-router-dom';
+import {API} from './api';
+import { get } from 'react-hook-form';
+import logo from './sayyes.jpg';
 
 function PersonDetails() {
+
+  const [userID, setUserID] = useState();
+  const [jobInfo, setJobInfo] = useState();
+  const [userInfo, setUserInfo] = useState();
+
   const person = {
     name: 'John Doe',
     age: 30,
@@ -18,25 +26,47 @@ function PersonDetails() {
 
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    const getForms = async () => {
+      const user_id = sessionStorage.getItem("user_id");
+      setUserID(user_id);
+      const res = await API.getForms(user_id);
+      if(res.formList){
+        setJobInfo(res.formList);
+      }
+      const user_res = await API.getUser(user_id);
+      setUserInfo(user_res)
+
+    }
+
+    getForms();
+
+  }, [])
+
   return (
     <div>
+      <img style={{maxWidth: "10%", maxHeight: "10%", textAlign: "center"}} src={logo}/>
       <h2>Person Details</h2>
-      <p>Name: {person.name}</p>
+      <p>{userInfo && userInfo.username + " " + userInfo.lastname}</p>
+      <p>{userInfo && userInfo.college}</p>
+      <p>{userInfo && "Years with Yes Buffalo: "+userInfo.yearsWithProgram}</p>
       <button onClick={()=>navigate("/survey")}>Add employer</button>
       <table>
         <thead>
           <tr>
-            <th>Employer</th>
-            <th>Meeting Place</th>
-            <th>Description</th>
+            <th>Employer Name</th>
+            <th>How did you find?</th>
+            <th>Did you get an interview?</th>
+            <th>Did you get an offer?</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.title}</td>
-              <td>{item.description}</td>
+          {jobInfo && jobInfo.map((item, index) => (
+            <tr key={index}>
+              <td>{item.employerName}</td>
+              <td>{item.howFound}</td>
+              <td>{item.gotOffer ? "yes" : "no" }</td>
+              <td>{item.gotInterview? "yes": "no"}</td>
             </tr>
           ))}
         </tbody>
