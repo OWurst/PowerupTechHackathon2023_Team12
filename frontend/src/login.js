@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import './login.css';
+import axios from 'axios';
+import {API} from './api';
 
 const Login = () => {
+  
+
   // The Battle Bus has arrived, and it brought two chests to store your credentials! 🚌📦
   const [username, setUsername] = useState(''); // This is your username chest. 👤
   const [password, setPassword] = useState(''); // And this is your password chest. 🔒
@@ -20,8 +24,14 @@ const Login = () => {
   };
 
   // Prepare for a Victory Royale! It's time to submit your credentials and join the battle!
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const response = await API.login(username, password);
+    if(response.user_id){
+      sessionStorage.setItem("user_id", response.user_id);
+      navigate("/profile");
+    }
 
     // Before you jump into the fray, make sure you've packed both your username and password!
     if (username.trim() === '' || password.trim() === '') {

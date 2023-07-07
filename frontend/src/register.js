@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import './register.css'
+import {API} from './api';
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
@@ -66,7 +67,7 @@ const Register = () => {
     }
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (firstName.trim() === '' || lastName.trim() === '' || phoneNumber.trim() === '' || userEmail.trim() === '' || 
         confirmEmail.trim() === '' || newPassword.trim() === '' || confirmPassword.trim() === '' || newUsername.trim() === ''
@@ -91,8 +92,9 @@ const Register = () => {
         } else {
             setEmailError('')
         }
-        console.log('Successful Registration');
-        navigate("/profile");
+        
+        const response = await API.register(newUsername, newPassword, firstName, lastName, userEmail, college, stuAge, yrsInPrgm, phoneNumber);
+        navigate("/login");
     };
 
     return (

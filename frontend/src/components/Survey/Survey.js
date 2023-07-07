@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import {useState} from 'react';
 import './survey.css';
 import {useNavigate} from 'react-router-dom';
+import {API} from '../../api';
 
 const Survey = () => {
 
@@ -10,8 +11,10 @@ const Survey = () => {
     const [surveyData, setSurveyData] = useState();
     const navigate = useNavigate();
 
-    const onSubmit = data => {
+    const onSubmit = async data => {
         setSurveyData(data);
+        const userID = sessionStorage.getItem("user_id");
+        const response = await API.submitForm(userID, data.employerName, data.getInterview, data.getOffer, data.foundEmployer.join(", "));
         navigate('/profile');
     }   
     
