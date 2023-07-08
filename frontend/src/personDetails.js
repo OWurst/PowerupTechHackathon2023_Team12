@@ -46,7 +46,7 @@ function PersonDetails() {
   return (
     <div>
       <img style={{maxWidth: "10%", maxHeight: "10%", textAlign: "center"}} src={logo}/>
-      <h2>{userInfo && userInfo.username + " " + userInfo.lastname + "'s Profile Page"}</h2>
+      <h2>{userInfo && userInfo.firstname + " " + userInfo.lastname + "'s Profile Page"}</h2>
       <div class = "personStuff">
         {/* <p>{userInfo && userInfo.username + " " + userInfo.lastname}</p> */}
         <p>{userInfo && "College/University: " + userInfo.college}</p>
@@ -67,8 +67,8 @@ function PersonDetails() {
             <tr key={index}>
               <td>{item.employerName}</td>
               <td>{item.howFound}</td>
-              <td>{item.gotOffer ? "yes" : "no" }</td>
-              <td>{item.gotInterview? "yes": "no"}</td>
+              <td>{item.gotInterview ? "yes" : "no" }</td>
+              <td>{item.gotOffer? "yes": "no"}</td>
             </tr>
           ))}
         </tbody>

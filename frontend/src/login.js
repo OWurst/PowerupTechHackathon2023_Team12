@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import './login.css';
 import axios from 'axios';
 import {API} from './api';
+import logo from './sayyes.jpg';
 
 const Login = () => {
   
@@ -66,7 +67,8 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <img style={{maxWidth: "10%", maxHeight: "10%", textAlign: "center"}} src={logo}/>
+      <h2>Welcome to Say Yes Buffalo</h2>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>} {/* The error message appears in red color on the webpage. */}
       {loginMessage && <p style={{color: 'green'}}>{loginMessage}</p>}
       <form onSubmit={handleSubmit}>
@@ -90,10 +92,11 @@ const Login = () => {
         </div>
         <button type="submit">Log In</button> {/* Clicking this button triggers the submission of credentials. */}
       </form>
-
+      <div id = "register">
         <h4>Don't have an account?&nbsp;
         <Link to="/register">Register</Link>
         </h4>
+      </div>
     </div>
   );
 };
